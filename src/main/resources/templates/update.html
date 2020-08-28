@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="webjars/bootstrap/3.3.5/css/bootstrap.css">
+    <script type="text/javascript" src="../js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui.js"></script>
+    <script type="text/javascript">
+
+        $(function(){
+            //得到当前时间
+            var date_now = new Date();
+            //得到当前年份
+            var year = date_now.getFullYear();
+            //得到当前月份
+            //注：
+            //  1：js中获取Date中的month时，会比当前月份少一个月，所以这里需要先加一
+            //  2: 判断当前月份是否小于10，如果小于，那么就在月份的前面加一个 '0' ， 如果大于，就显示当前月份
+            var month = date_now.getMonth()+1 < 10 ? "0"+(date_now.getMonth()+1) : (date_now.getMonth()+1);
+            //得到当前日子（多少号）
+            var date = date_now.getDate() < 10 ? "0"+date_now.getDate() : date_now.getDate();
+            //设置input标签的max属性
+            $("#age").attr("max",year+"-"+month+"-"+date);
+            $("#entrydate").attr("max",year+"-"+month+"-"+date);
+        })
+    </script>
+</head>
+<body>
+<form action="/saveupdate" method="post">
+<table class="table text-info">
+    <tr>
+        <td>ID</td>
+        <td><input type="text" id="id" name="id" readonly th:value="${worker.id}"></td>
+    </tr>
+
+    <tr>
+        <td>姓名</td>
+        <td><input type="text" id="worker" name="worker" th:value="${worker.worker}" required pattern="[\u4e00-\u9fa5]{2,5}"></td>
+    </tr>
+    <tr>
+        <td>性别</td>
+        <td>
+            <select name="sex" id="sex" required>
+                <option selected="selected" th:selected="${worker.sex}eq''" value=" "></option>
+                <option th:selected="${worker.sex}eq'男'" value="男">男</option>
+                <option th:selected="${worker.sex}eq'女'" value="女">女</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>生日</td>
+        <td><input type="date"  id="age" name="age" th:value="${worker.age}" required></td>
+    </tr>
+    <tr>
+        <td>员工号</td>
+        <td><input type="text" id="workerid" name="workerid" th:value="${worker.workerid}" readonly></td>
+    </tr>
+    <tr>
+
+        <td>员工类型</td>
+        <td>
+            <select name="type" id="type" required>
+                <option selected="selected" th:selected="${worker.type}eq''" value=""></option>
+                <option th:selected="${worker.type}eq'医生'" value="医生">医生</option>
+                <option th:selected="${worker.type}eq'护士'" value="护士">护士</option>
+                <option th:selected="${worker.type}eq'护工'" value="护工">护工</option>
+                <option th:selected="${worker.type}eq'管理员'" value="管理员">管理员</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>入职时间</td>
+        <td><input type="date" id="entrydate" name="entrydate" th:value="${worker.entrydate}" required ></td>
+    </tr>
+    <tr>
+        <td>职务</td>
+        <td><input type="text" id="post" name="post" th:value="${worker.post}"></td>
+    </tr>
+    <tr>
+        <td>职称</td>
+        <td><input type="text" id="title" name="title" th:value="${worker.title}"></td>
+    </tr>
+    <tr>
+        <td>人员状态</td>
+        <td>
+            <select name="status" id="status" required>
+                <option selected="selected" th:selected="${worker.status}eq''" value=""></option>
+                <option th:selected="${worker.status}eq'在职'" value="在职">在职</option>
+                <option th:selected="${worker.status}eq'离职'" value="离职">离职</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>简介</td>
+        <td><input type="text" id="introduction" name="introduction" th:value="${worker.introduction}"></td>
+    </tr>
+    <tr>
+        <td>备注</td>
+        <td><input type="text" id="note" name="introduction" th:value="${worker.note}"></td>
+    </tr>
+    <tr>
+    <td><input type="submit" value="修改" id="update" name="update" class="btn btn-success">
+        <input type="hidden" name="_method" value="put"></td>
+    </tr>
+</table>
+</form>
+</body>
+</html>

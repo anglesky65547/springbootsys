@@ -1,0 +1,17 @@
+﻿/* CSS Document */
+.daohang{
+	font-family:"黑体";
+	font-size:14px;
+	font-weight:bold;
+}
+.daohang a:link,
+.daohang a:visited{
+	font-family:"黑体";
+	font-size:14px;
+	font-weight:bold;
+}
+.daohang font{
+	font-family:"黑体";
+	font-size:16px;
+	font-weight:lighter;
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="webjars/bootstrap/3.3.5/css/bootstrap.css">
+    <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+</head>
+<body>
+<form action="searchbybed" method="post">
+    <input type="text" id="name" name="name" value="" placeholder="客户姓名" size="22" class="form form-group-lg">
+    <input type="submit" value="查询" class="btn btn-primary">
+    <a th:href="|addbed|" class="btn btn-success">新增</a>
+</form>
+
+<table class="table table-hover">
+    <tr>
+        <th>序号</th>
+        <th>客户姓名</th>
+        <th>床位使用开始日期</th>
+        <th>床位使用结束日期</th>
+        <th>床位详细信息</th>
+        <th>操作</th>
+    </tr>
+    <tr th:each="d:${bed}">
+        <td th:text="${d.bedid}"></td>
+        <td th:text="${d.customername}"></td>
+        <td th:text="${d.startdate}"></td>
+        <td th:text="${d.enddate}"></td>
+        <td th:text="${d.info}"></td>
+        <td>
+            <a th:href="|updatebed/${d.bedid}|" class="btn btn-info">修改</a>
+            <a th:onclick="|dele(this,${d.bedid})|" class="btn btn-danger">删除</a>
+        </td>
+    </tr>
+    <script>
+        function dele(obj,id) {
+            if (confirm("确定要删除吗？")) {
+                alert("要删除的编号为：" + id);
+                //发送删除操作请求
+                $.ajax({
+                    url:"/delbed/"+id,
+                    type:"DELETE",
+                    success:function(result){
+                        if (result == "success"){
+                            //删除当前行
+                            $(obj).parent().parent().remove();
+                        }else {
+
+                        }
+                    }
+                })
+            }else {
+                alert("取消删除")
+            }
+        }
+    </script>
+
+</table>
+</body>
+</html>

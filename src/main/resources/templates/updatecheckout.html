@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../webjars/bootstrap/3.3.5/css/bootstrap.css">
+    <script type="text/javascript" src="../js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //得到当前时间
+            var date_now = new Date();
+            //得到当前年份
+            var year = date_now.getFullYear();
+            //得到当前月份
+            //注：
+            //  1：js中获取Date中的month时，会比当前月份少一个月，所以这里需要先加一
+            //  2: 判断当前月份是否小于10，如果小于，那么就在月份的前面加一个 '0' ， 如果大于，就显示当前月份
+            var month = date_now.getMonth()+1 < 10 ? "0"+(date_now.getMonth()+1) : (date_now.getMonth()+1);
+            //得到当前日子（多少号）
+            var date = date_now.getDate() < 10 ? "0"+date_now.getDate() : date_now.getDate();
+            //设置input标签的max属性
+            $("#checkoutdata").attr("max",year+"-"+month+"-"+date);
+            $("#applicationdata").attr("max",year+"-"+month+"-"+date);
+            $("#auditdata").attr("max",year+"-"+month+"-"+date);
+        })
+    </script>
+</head>
+<body>
+<form action="/savecheckout" method="post">
+    <table class="table table-hover">
+        <tr hidden>
+            <td>序号</td>
+            <td><input type="text" name="id" id="id" th:value="${checkout.id}" readonly></td>
+        </tr>
+        <tr>
+            <td>客户姓名</td>
+<!--            <td><input type="text" name="customername" id="customername" th:value="${checkout.customername}"></td>-->
+            <td>
+                <select name="customername" id="customername">
+                    <option th:each="item:${name}" th:text="${item.name}"
+                            th:value="${item.name}" th:selected="(${item.name} == ${checkout.customername})">
+
+                    </option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>退住类型</td>
+            <td>
+                <select name="type" id="type" required>
+                    <option th:selected="${checkout.type}eq ''" selected value=""></option>
+                    <option th:selected="${checkout.type}eq '正常退住'" value="正常退住">正常退住</option>
+                    <option th:selected="${checkout.type}eq '保留床位'" value="保留床位">保留床位</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>退住原因</td>
+            <td><input type="text" name="reason" id="reason" th:value="${checkout.reason}"></td>
+        </tr>
+        <tr>
+            <td>退住时间</td>
+            <td><input type="date" name="checkoutdata" id="checkoutdata" max="" th:value="${checkout.checkoutdata}" required></td>
+        </tr>
+        <tr>
+            <td>申请时间</td>
+            <td><input type="date" name="applicationdata" id="applicationdata" th:value="${checkout.applicationdata}" required></td>
+        </tr>
+        <tr>
+            <td>审核意见</td>
+            <td><select name="auditMind" id="auditMind" >
+                <option th:selected="${checkout.auditMind}eq''" selected value=""></option>
+                <option th:selected="${checkout.auditMind}eq'同意'" value="同意">同意</option>
+                <option th:selected="${checkout.auditMind}eq'不同意'" value="不同意">不同意</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td>审核时间</td>
+            <td><input type="date" name="auditdata" id="auditdata" th:value="${checkout.auditdata}" required></td>
+        </tr>
+        <tr>
+            <td>审核人</td>
+            <td><input type="text" name="worker" id="worker" th:value="${checkout.worker}"></td>
+        </tr>
+        <tr>
+            <td>审核状态</td>
+            <td>
+                <select name="auditstatus" id="auditstatus" th:value="${checkout}">
+                    <option th:selected="${checkout.auditstatus}eq ''" selected value=""></option>
+                    <option th:selected="${checkout.auditstatus}eq '待审核'" value="待审核">待审核</option>
+                    <option th:selected="${checkout.auditstatus}eq '审核中'" value="审核中">审核中</option>
+                    <option th:selected="${checkout.auditstatus}eq '已审核'" value="已审核">已审核</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>备注信息</td>
+            <td><input type="text" name="note" id="note" th:value="${checkout.note}"></td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="修改" id="add" name="add" class="btn btn-primary" >
+                <input type="hidden" name="_method" value="put">
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

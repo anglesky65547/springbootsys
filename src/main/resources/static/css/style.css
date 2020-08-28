@@ -1,0 +1,102 @@
+﻿html{
+	min-width:1002px;
+}
+body{
+	margin:0;
+	padding:0;
+	color:#000;
+	font-size:13px;
+	min-width:1002px;
+	background:#2c7cbb;
+}
+A:link, A:visited{
+	color:#163d67;
+	text-decoration:none;
+}
+A:hover{
+	color:#f60;
+}
+.redlink:link, .redlink:visited{
+	color:#F00;
+}
+
+/* top */
+.topbg{
+	font-size:12px;
+}
+.topbg1{
+	background:url(../images/01.jpeg) no-repeat left top;
+	height: 120px;
+}
+.topbg2{
+	background: url(../images/02.jpeg);
+	padding:0 11px
+}
+.topbg2 strong{
+	color:#F00;
+}
+.menu{
+
+	font-size:23px;
+	padding:0 30px;
+}
+.menu a:link, .menu a:visited{
+	font-weight:bold;
+	font-size:13px;
+	width:91px;
+	line-height:32px;
+	display:block;
+	float:left;
+	text-align:center;
+}
+.menu a:hover{
+	color:#163d67;
+}
+
+/* main */
+.main{
+	padding:0px 0px;
+	clear:both;
+}
+
+/* right */
+.right{
+	padding-left:0px;
+}
+.tab{
+	height:30px;
+	line-height:25px;
+	padding:0 30px;
+}
+.a{
+	padding:0 4px 0 10px;
+}
+.b{
+	padding:0 10px 0 4px;
+}
+.newTab{
+	border-left:solid 1px #499eb3;
+	border-right:solid 1px #499eb3;
+	margin-top:5px;
+	height:25px;
+	float:left
+}
+.newTab .a{
+	font-weight:bold
+}
+.allTab{
+	margin-top:5px;
+	padding:0 20px;
+	height:25px;
+	float:left
+}
+
+/* footer */
+.footer{
+	clear:both;
+	line-height:23px;
+	text-align:right;
+	padding-right:20px;
+	color:#163d67;
+	font-size:12px;
+}

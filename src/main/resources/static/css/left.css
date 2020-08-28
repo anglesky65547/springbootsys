@@ -1,0 +1,83 @@
+﻿html{
+	min-height:600px;
+}
+body{
+	margin:0;
+	padding:0;
+	color:#000;
+	font-size:13px;
+	min-height:600px;
+	background:#fff url(../images/menu_02.jpg) no-repeat bottom left;
+}
+A:link, A:visited{
+	color:#163d67;
+	text-decoration:none;
+}
+A:hover{
+	color:#163d67;
+}
+.leftmenu{
+	background:url(../images/menu_03.jpg);
+	font-size:13px;
+	color:#163d67;
+	margin:0;
+	padding:0;
+	font-weight:bold;
+	text-align:left
+}
+.leftmenu ul{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+.leftmenu li{
+	margin:0;
+	padding:0;
+	list-style:none;
+	background:url(../images/menu_02_02.jpg);
+	line-height:35px;
+}
+.leftmenu li a:link,
+.leftmenu li a:visited{
+	padding-left:30px;
+	display:block;
+}
+.leftmenu li a:hover{
+	background:url(../images/menu_02_01.jpg);
+	line-height:35px;
+	display:block;
+}
+.leftmenu li li,
+.leftmenu li li a:link,
+.leftmenu li li a:visited{
+	background:url(../images/menu_03_01.jpg);
+	line-height:24px;
+	color:#3796ce;
+}
+.leftmenu li li a:hover{
+	background:url(../images/menu_03_02.jpg);
+	line-height:24px;
+	color:#163d67;
+}
+.leftmenu li li li{
+	background:url(../images/menu_04_01.jpg);
+	font:0px/0px Arial;
+}
+.leftmenu li li li a:link,
+.leftmenu li li li a:visited{
+	background:url(../images/menu_04_01.jpg);
+	font:13px/24px Arial;
+	font-weight:normal;
+	color:#163d67;
+	display:block;
+}
+.leftmenu li li li a:link,
+.leftmenu li li li a:visited{
+	padding-left:40px;
+}
+.leftmenu li li li a:hover{
+	background:url(../images/menu_04_02.jpg);
+	line-height:24px;
+	font-weight:normal;
+	color:#3796ce;
+}

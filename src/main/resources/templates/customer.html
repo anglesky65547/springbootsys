@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="webjars/bootstrap/3.3.5/css/bootstrap.css">
+    <script type="text/javascript" src="../js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui.js"></script>
+</head>
+<body>
+<form action="searchbyname" method="post">
+    <input type="text" id="name" name="name" value="" placeholder="客户姓名" size="22" class="form form-group-lg">
+    <input type="submit" value="查询" class="btn btn-primary">
+    <a th:href="|addCustomer|" class="btn btn-success">新增员工</a>
+</form>
+
+<table class="table table-hover">
+    <tr>
+        <th>客户ID</th>
+        <th>客户姓名</th>
+        <th>性别</th>
+        <th>生日</th>
+        <th>身份证号</th>
+        <th>房间号</th>
+        <th>所属楼房</th>
+        <th>档案号</th>
+        <th>老人类型</th>
+        <th>入住时间</th>
+        <th>服务到期时间</th>
+        <th>联系电话</th>
+        <th>身高</th>
+        <th>婚姻状况</th>
+        <th>体重</th>
+        <th>血型</th>
+        <th>登记员</th>
+        <th align="right">操作</th>
+    </tr>
+    <tr th:each="d:${customer}">
+        <td th:text="${d.customerid}"></td>
+        <td th:text="${d.name}"></td>
+        <td th:text="${d.sex}"></td>
+        <td th:text="${d.age}"></td>
+        <td th:text="${d.idnumber}"></td>
+        <td th:text="${d.roomid}"></td>
+        <td th:text="${d.floatid}"></td>
+        <td th:text="${d.filesid}"></td>
+        <td th:text="${d.oldmantype}"></td>
+        <td th:text="${d.checkindata}"></td>
+        <td th:text="${d.servicematurity}"></td>
+        <td th:text="${d.phonenumber}"></td>
+        <td th:text="${d.height}"></td>
+        <td th:text="${d.maritalstatus}"></td>
+        <td th:text="${d.weight}"></td>
+        <td th:text="${d.bloodtype}"></td>
+        <td th:text="${d.worker}"></td>
+        <td>
+            <a th:href="|updatel/${d.customerid}|" class="btn btn-info">修改</a>
+            <a th:onclick="|dele(this,${d.customerid})|" class="btn btn-danger">删除</a>
+        </td>
+    </tr>
+    <script>
+        function dele(obj,id) {
+            if (confirm("确定要删除吗？")) {
+                alert("要删除的编号为：" + id);
+                //发送删除操作请求
+                $.ajax({
+                    url:"/dele/"+id,
+                    type:"DELETE",
+                    success:function(result){
+                        if (result == "success"){
+                            //删除当前行
+                            $(obj).parent().parent().remove();
+                        }else {
+
+                        }
+                    }
+                })
+            }else {
+                alert("取消删除")
+            }
+        }
+    </script>
+
+</table>
+</body>
+</html>

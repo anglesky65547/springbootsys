@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="webjars/bootstrap/3.3.5/css/bootstrap.css">
+    <script type="text/javascript" src="../js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui.js"></script>
+    <script type="text/javascript">
+    </script>
+</head>
+<body>
+<form action="/newworker" method="post" name="form1">
+<table class="table table-hover">
+    <tr >
+        <td>员工号</td>
+        <td><input type="text" id="workerid" name="workerid" required></td>
+    </tr>
+    <tr>
+        <td>姓名</td>
+        <td><input type="text" id="worker" name="worker" required pattern="[\u4e00-\u9fa5]{2,5}"></td>
+    </tr>
+    <tr>
+        <td>性别</td>
+        <td>
+            <select name="sex" id="sex" required>
+                <option value="男">男</option>
+                <option value="女">女</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>生日</td>
+        <td><input type="date" max="2020-08-17" id="age" name="age" required></td>
+    </tr>
+
+    <tr>
+        <td>员工类型</td>
+        <td>
+            <select name="type" id="type" required>
+            <option selected="selected" value=""></option>
+            <option value="医生">医生</option>
+            <option value="护士">护士</option>
+            <option value="护工">护工</option>
+            <option value="管理员">管理员</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>入职时间</td>
+        <td><input type="date" max="2020-08-17" id="entrydate" name="entrydate" required></td>
+    </tr>
+    <tr>
+        <td>职务</td>
+        <td><input type="text" id="post" name="post" ></td>
+    </tr>
+    <tr>
+        <td>职称</td>
+        <td><input type="text" id="title" name="title"></td>
+    </tr>
+    <tr>
+        <td>人员状态</td>
+        <td>
+            <select name="status" id="status" required>
+            <option selected="selected" value=""></option>
+            <option value="在职">在职</option>
+            <option value="离职">离职</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>手机号码</td>
+        <td><input type="text" id="phonenumber" name="phonenumber"  required pattern="^1[3456789]\d{9}$"></td>
+    </tr>
+    <tr>
+        <td>简介</td>
+        <td><input type="text" id="introduction" name="introduction"></td>
+    </tr>
+    <tr>
+        <td>备注</td>
+        <td><input type="text" id="note" name="introduction"></td>
+    </tr>
+    <tr>
+    <td><input type="submit" value="增加" id="add" name="add" class="btn btn-primary" >
+<!--        <input type="hidden" name="_method" value="put"></td>-->
+    </tr>
+</table>
+</form>
+</body>
+</html>

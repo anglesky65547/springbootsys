@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="webjars/bootstrap/3.3.5/css/bootstrap.css">
+<title>颐养中心</title>
+<style>
+	p{
+		font-size:16px;
+		padding-left:32px;
+	}
+	font{
+		font-size:14px;
+	}
+</style>
+</head>
+<body>
+<strong><font>颐养中心</font></strong><br/>
+<p th:text="|${session.login.data.name},欢迎使用颐养中心管理平台|">XXX,欢迎使用颐养中心管理平台</p>
+</body>
+</html>

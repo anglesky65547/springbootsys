@@ -1,0 +1,17 @@
+﻿/* CSS Document */
+.tabs{
+	border-bottom:double;
+	border-bottom-color:#99FFFF;
+	border-left:double;
+	border-left-color:#99FFFF;
+	border-right:double;
+	border-right-color:#99FFFF;
+}
+.tabs th{
+	background-image:url(../images/tab02.gif);
+}
+.tabs td{
+	border-top-width:thin;
+	border-top-style:solid;
+	border-top-color:#99FFFF;
+}

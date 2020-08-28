@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>登陆界面</title>
+
+    <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+        function validate() {
+
+            if (!(/^\w{5,15}$/.test($("#name").val()))) {
+                alert("登录名称必须是5~15位");
+                $("#name").focus();
+                return false;
+            } else if (!(/^\w{5,15}$/.test($("#password").val()))) {
+                alert("登录密码必须是5~15位！");
+                $("#password").focus();
+                return false;
+            }
+            return true;
+        }
+
+        $(function () {
+            //表单提交：登录请求
+            $("form").submit(function () {
+
+                if(!validate()){
+                	return false;
+                }
+
+                //数据验证
+                //使用ajax登录请求
+                $.ajax({
+                    url: "checklogin",
+                    type: "POST",
+                    data: $("form").serialize(),
+                    success: function (data) {
+                        if (data.success) {
+                        	alert(data.message)
+                            window.location.href = "/index"
+                        } else {
+                          //  alert(data.message)
+                        }
+                    }
+                })
+
+                //阻止表单请求
+                return false;
+            })
+        })
+
+    </script>
+
+    <style type="text/css">
+        body {
+            background-image: url(images/01.jpeg);
+            background-repeat: no-repeat;
+        }
+    </style>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+
+<form name="form1" method="post">
+
+    <div
+            style="width: 521px; height: 315px; top: 96px; left: 47px;margin:0px auto;">
+        <table width="100%" border="0" cellspacing="0"
+               align="center" cellpadding="4" background="">
+            <tr bgcolor="">
+                <th colspan="2" align="center" height="331">
+                    <font size="9" color="#FFFFFF">欢迎登录系统</font>
+                </th>
+            </tr>
+            <tr>
+                <td width="30%" align="right">
+                    <font size="2" color="#FFFFFF"><b>登录名称：</b> </font></td>
+                <td>
+                    <input name="name" id="name" type="text" size="30" maxlength="30"/></td>
+            </tr>
+            <tr>
+                <td height="30" align="right">
+                    <font size="2" color="#FFFFFF"><b>登录密码：</b> </font></td>
+                <td>
+                    <input name="psw" id="psw" type="password" size="30" maxlength="30"/></td>
+            </tr>
+
+            <tr>
+                <td colspan="2" height="30" align="center">
+                    <input type="submit" value="登录">
+                    &nbsp;
+                    <input type="reset" value="重置"/></td>
+        </table>
+    </div>
+</form>
+</body>
+
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="webjars/bootstrap/3.3.5/css/bootstrap.css">
+    <script type="text/javascript" src="../js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui.js"></script>
+    <script type="text/javascript">
+
+        $(function(){
+            //得到当前时间
+            var date_now = new Date();
+            //得到当前年份
+            var year = date_now.getFullYear();
+            //得到当前月份
+            //注：
+            //  1：js中获取Date中的month时，会比当前月份少一个月，所以这里需要先加一
+            //  2: 判断当前月份是否小于10，如果小于，那么就在月份的前面加一个 '0' ， 如果大于，就显示当前月份
+            var month = date_now.getMonth()+1 < 10 ? "0"+(date_now.getMonth()+1) : (date_now.getMonth()+1);
+            //得到当前日子（多少号）
+            var date = date_now.getDate() < 10 ? "0"+date_now.getDate() : date_now.getDate();
+            //设置input标签的max属性
+            $("#age").attr("max",year+"-"+month+"-"+date);
+            $("#checkindata").attr("max",year+"-"+month+"-"+date);
+            $("#servicematurity").attr("max",year+"-"+month+"-"+date);
+        })
+    </script>
+</head>
+<body>
+<form action="/updatesave" method="post">
+    <table class="table table-hover">
+        <tr>
+            <td>客户ID</td>
+            <td><input type="text" th:value="${date.customerid}" id="customerid" name="customerid" readonly="readonly" ></td>
+        </tr>
+        <tr>
+            <td>客户姓名</td>
+            <td><input type="text" th:value="${date.name}" id="name" name="name" required></td>
+        </tr>
+        <tr>
+            <td>性别</td>
+            <td>
+                <select name="sex" id="sex" required>
+                <option selected="selected" th:selected="${date.sex}eq''" value=" "></option>
+                <option th:selected="${date.sex}eq'男'" value="男">男</option>
+                <option th:selected="${date.sex}eq'女'" value="女">女</option>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td>生日</td>
+            <td><input type="date" max="2020-08-17" th:value="${date.age}" id="age" name="age"></td>
+        </tr>
+        <tr>
+            <td>身份证号</td>
+            <td><input type="text" th:value="${date.idnumber}" id="idnumber" name="idnumber" required pattern="^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$"></td>
+        </tr>
+        <tr>
+            <td>房间号</td>
+            <td><input type="text" th:value="${date.roomid}" id="roomid" name="roomid"></td>
+        </tr>
+        <tr>
+            <td>所属楼房</td>
+            <td><input type="text" th:value="${date.floatid}" id="floatid" name="floatid"></td>
+        </tr>
+        <tr>
+            <td>档案号</td>
+            <td><input type="text" th:value="${date.filesid}" id="filesid" name="filesid" required></td>
+        </tr>
+        <tr>
+            <td>老人类型</td>
+            <td>
+                <select name="oldmantype" id="oldmantype" required>
+                <option selected="selected" th:selected="${date.oldmantype}eq''" value=""></option>
+                <option th:selected="${date.oldmantype}eq'自理老人'" value="自理老人" >自理老人</option>
+                <option th:selected="${date.oldmantype}eq'借助老人'" value="借助老人"  >借助老人</option>
+                <option th:selected="${date.oldmantype}eq'介护老人'" value="介护老人">介护老人</option>
+                <option th:selected="${date.oldmantype}eq'失能老人'" value="失能老人">失能老人</option>
+                <option th:selected="${date.oldmantype}eq'失智症老人'" value="失智症老人">失智症老人</option>
+                </select>
+            </td>
+            </td>
+        </tr>
+        <tr>
+            <td>入住时间</td>
+            <td><input type="date" max="2020-08-17" th:value="${date.checkindata}" id="checkindata" name="checkindata" required> </td>
+        </tr>
+        <tr>
+            <td>服务到期时间</td>
+            <td><input type="date" max="2020-08-17" th:value="${date.servicematurity}"  id="servicematurity" name="servicematurity" required></td>
+        </tr>
+        <tr>
+            <td>联系电话</td>
+            <td><input type="text" th:value="${date.phonenumber}" id="phonenumber" name="phonenumber" required pattern="^1[3456789]\d{9}$"></td>
+        </tr>
+        <tr>
+            <td>身高</td>
+            <td><input type="text" th:value="${date.height}" id="height" name="height"></td>
+        </tr>
+        <tr>
+            <td>婚姻状况</td>
+            <td>
+                <select name="maritalstatus" id="maritalstatus" required>
+                    <option th:selected="${date.maritalstatus}eq''" selected="selected"  value=""></option>
+                    <option th:selected="${date.maritalstatus}eq'已婚'" value="已婚">已婚</option>
+                    <option th:selected="${date.maritalstatus}eq'未婚'" value="未婚">未婚</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>体重</td>
+            <td><input type="text" th:value="${date.weight}" id="weight" name="weight"></td>
+        </tr>
+        <tr>
+            <td>血型</td>
+            <td> <select name="bloodtype" id="bloodtype" required>
+                <option th:selected="${date.bloodtype}eq''" value="" selected="selected"></option>
+                <option th:selected="${date.bloodtype}eq'A型'" value="A型">A型</option>
+                <option th:selected="${date.bloodtype}eq'B型'" value="B型">B型</option>
+                <option th:selected="${date.bloodtype}eq'O型'" value="O型">O型</option>
+                <option th:selected="${date.bloodtype}eq'AB型'" value="AB型">AB型</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td>登记员</td>
+            <td><input type="text" th:value="${date.worker}" id="worker" name="worker"></td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="修改" id="add" name="add" class="btn btn-primary" >
+                <input type="hidden" name="_method" value="put">
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

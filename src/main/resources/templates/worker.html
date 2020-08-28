@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>工作人员管理页面</title>
+    <link rel="stylesheet" href="webjars/bootstrap/3.3.5/css/bootstrap.css">
+    <script type="text/javascript" src="../js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui.js"></script>
+</head>
+<body>
+<h2></h2>
+<form action="search" method="post">
+    <input type="text" id="worker" name="worker" value="" placeholder="员工姓名" size="22" class="form form-group-lg">
+    <input type="submit" value="查询" class="btn btn-primary">
+    <a th:href="|add|" class="btn btn-success">新增员工</a>
+</form>
+
+<table class="table table-hover">
+    <tr>
+        <th>序号</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>生日</th>
+        <th>员工号</th>
+        <th>员工类型</th>
+        <th>入职时间</th>
+        <th>职务</th>
+        <th>职称</th>
+        <th>人员状态</th>
+        <th>简介</th>
+        <th>备注</th>
+        <th align="right">操作</th>
+    </tr>
+    <tr th:each="d:${list}">
+        <td th:text="${d.id}"></td>
+        <td th:text="${d.worker}"></td>
+        <td th:text="${d.sex}"></td>
+        <td th:text="${d.age}"></td>
+        <td th:text="${d.workerid}"></td>
+        <td th:text="${d.type}"></td>
+        <td th:text="${d.entrydate}"></td>
+        <td th:text="${d.post}"></td>
+        <td th:text="${d.title}"></td>
+        <td th:text="${d.status}"></td>
+        <td th:text="${d.introduction}"></td>
+        <td th:text="${d.note}"></td>
+        <td>
+            <a th:href="|update/${d.id}|" class="btn btn-info">修改</a>
+            <a th:onclick="|del(this,${d.id})|" class="btn btn-danger">删除</a>
+        </td>
+    </tr>
+    <script>
+        function del(obj,id) {
+            if (confirm("确定要删除吗？")) {
+                alert("要删除的编号为：" + id);
+                //发送删除操作请求
+                $.ajax({
+                    url:"/del/"+id,
+                    type:"DELETE",
+                    success:function(result){
+                        if (result == "success"){
+                            //删除当前行
+                            $(obj).parent().parent().remove();
+                        }else {
+
+                        }
+                    }
+                })
+            }else {
+                alert("取消删除")
+            }
+        }
+    </script>
+
+</table>
+</body>
+</html>
